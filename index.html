@@ -13,7 +13,7 @@
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 		
-		async function waitForGlobal(name, interval = 20) {
+		async function waitForGlobal(name, interval = 10) {
 			while (!window[name])
 				await pause(interval);
 		}
