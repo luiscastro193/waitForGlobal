@@ -4,22 +4,23 @@
 	<meta charset="utf-8">
 	<title>waitForGlobal</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script async src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script async src="https://cdn.plot.ly/plotly-latest.min.js" meta-id="Plotly"></script>
 </head>
 <body>
 	<p>Waiting...</p>
 	<script>
-		function pause(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		}
-		
-		async function waitForGlobal(name, interval = 10) {
-			while (!window[name])
-				await pause(interval);
+		function waitForGlobal(name) {
+			return new Promise(resolve => {
+				if (window[name])
+					return resolve();
+				
+				document.head.querySelector(`[meta-id=${name}]`).addEventListener('load', () => resolve());
+			});
 		}
 		
 		async function test() {
 			await waitForGlobal("Plotly");
+			console.log(Plotly);
 			document.querySelector('p').textContent = "Library loaded";
 		}
 		
