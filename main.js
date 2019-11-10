@@ -15,7 +15,7 @@ function appendScriptTag(url, id) {
 	document.head.appendChild(script);
 }
 
-function loadLibrary(url, global) {
+function lazyLoad(url, global) {
 	if (!document.head.querySelector(`[meta-id=${global}]`))
 		appendScriptTag(url, global);
 	
@@ -23,7 +23,7 @@ function loadLibrary(url, global) {
 }
 
 async function test() {
-	await loadLibrary("https://cdn.plot.ly/plotly-latest.min.js", "Plotly");
+	await lazyLoad("https://cdn.plot.ly/plotly-latest.min.js", "Plotly");
 	console.log(Plotly);
 	document.querySelector('p').textContent = "Library loaded";
 }
