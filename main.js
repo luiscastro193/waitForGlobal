@@ -8,7 +8,7 @@ function waitForGlobal(name) {
 }
 
 function appendScriptTag(url, id) {
-	let script = document.createElement( 'script' );
+	let script = document.createElement('script');
 	script.setAttribute('src', url);
 	script.setAttribute('meta-id', id);
 	script.setAttribute('async', '');
