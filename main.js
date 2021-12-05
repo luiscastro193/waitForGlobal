@@ -3,20 +3,20 @@ function waitForGlobal(name) {
 		if (window[name])
 			return resolve();
 		
-		document.head.querySelector(`[meta-id=${name}]`).addEventListener('load', () => resolve());
+		document.head.querySelector(`[data-id=${name}]`).addEventListener('load', () => resolve());
 	});
 }
 
 function appendScriptTag(url, id) {
 	let script = document.createElement('script');
 	script.setAttribute('src', url);
-	script.setAttribute('meta-id', id);
+	script.setAttribute('data-id', id);
 	script.setAttribute('async', '');
 	document.head.appendChild(script);
 }
 
 function lazyLoad(url, global) {
-	if (!document.head.querySelector(`[meta-id=${global}]`))
+	if (!document.head.querySelector(`[data-id=${global}]`))
 		appendScriptTag(url, global);
 	
 	return waitForGlobal(global);
