@@ -3,7 +3,7 @@ function waitForGlobal(name) {
 		if (window[name])
 			return resolve();
 		
-		document.head.querySelector(`[data-id=${name}]`).addEventListener('load', () => resolve());
+		document.head.querySelector(`[data-id=${name}]`).addEventListener('load', () => resolve(), {once: true});
 	});
 }
 
